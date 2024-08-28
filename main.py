@@ -2,6 +2,7 @@ import pygame
 from sys import exit
 from random import randint, choice
 
+# convert every core gameplay feture to a class for nice ness
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -43,6 +44,7 @@ class Player(pygame.sprite.Sprite):
         self.apply_gravity()
         self.animation_state()
 
+# handle the score/ enmeys / display / anmations
 class Obstacle(pygame.sprite.Sprite):
 	def __init__(self,type):
 		super().__init__()
@@ -89,7 +91,7 @@ def collision_sprite():
 		return False
 	else: return True
 
-
+#initlize pygame
 pygame.init()
 screen = pygame.display.set_mode((800,400))
 pygame.display.set_caption('Runner')
@@ -127,6 +129,7 @@ game_message_rect = game_message.get_rect(center = (400,330))
 obstacle_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(obstacle_timer,1500)
 
+# keep looping until it ready to break aka when the player close out 
 while True:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -167,5 +170,8 @@ while True:
 		if score == 0: screen.blit(game_message,game_message_rect)
 		else: screen.blit(score_message,score_message_rect)
 
+	# update the display 
 	pygame.display.update()
+	
+	# make it where the game can run at 60Fps and Lock it 
 	clock.tick(60)
